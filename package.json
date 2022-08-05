@@ -1,0 +1,45 @@
+{
+  "name": "er-gamedata-watcher",
+  "version": "0.0.0",
+  "description": "big bro is watching you",
+  "keywords": [
+    "NimbleNeuron",
+    "EternalReturn"
+  ],
+  "homepage": "https://github.com/pypy-vrc/er-gamedata-watcher#readme",
+  "bugs": {
+    "url": "https://github.com/pypy-vrc/er-gamedata-watcher/issues"
+  },
+  "license": "MIT",
+  "author": "pypy <git@pypy.moe>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pypy-vrc/er-gamedata-watcher.git"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "webpack --config webpack.config.js --mode development",
+    "watch": "webpack --config webpack.config.js --mode development --watch",
+    "prod": "webpack --config webpack.config.js --mode production",
+    "lint": "eslint --ext .js,.jsx,.ts src/ && prettier --check src/"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "jszip": "^3.10.1",
+    "simple-git": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/webpack-env": "^1.17.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.1",
+    "@typescript-eslint/parser": "^5.30.1",
+    "esbuild-loader": "^2.19.0",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.11",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
