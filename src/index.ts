@@ -64,10 +64,12 @@ async function syncGameData(repoPath: string, git: simpleGit.SimpleGit) {
 
   const zipNames = await getZipNames();
   const checkpointIndex = zipNames.indexOf(checkpoint.message);
-  if (checkpointIndex === -1) {
-    throw new Error("checkpoint not found");
+  // if (checkpointIndex === -1) {
+  //   throw new Error("checkpoint not found");
+  // }
+  if (checkpointIndex >= 0) {
+    zipNames.splice(0, checkpointIndex);
   }
-  zipNames.splice(0, checkpointIndex);
   console.log(new Date(), "zipNames", zipNames);
 
   for (const zipName of zipNames) {
@@ -108,25 +110,25 @@ async function getZipNames() {
   });
   console.log(new Date(), "latestVersion", versionResponse.data);
 
-  const response = await axios.default.request({
-    url: `https://d1wkxvul68bth9.cloudfront.net/gameDb/${versionResponse.data}`,
-    responseType: "arraybuffer",
-  });
+  // const response = await axios.default.request({
+  //   url: `https://d1wkxvul68bth9.cloudfront.net/gameDb/${versionResponse.data}`,
+  //   responseType: "arraybuffer",
+  // });
 
-  const zip = await jszip.loadAsync(response.data);
+  // const zip = await jszip.loadAsync(response.data);
   const zipSet = new Set([`gameDb/${versionResponse.data}`]);
 
-  for (const zipObj of Object.values(zip.files)) {
-    if (zipObj.name.toLowerCase() === "hash.json") {
-      for (const name of Object.keys(JSON.parse(await zipObj.async("text")))) {
-        if (/^gameDb\/gamedata-\d{14}.zip$/.test(name) === false) {
-          continue;
-        }
-        zipSet.add(name);
-      }
-      break;
-    }
-  }
+  // for (const zipObj of Object.values(zip.files)) {
+  //   if (zipObj.name.toLowerCase() === "hash.json") {
+  //     for (const name of Object.keys(JSON.parse(await zipObj.async("text")))) {
+  //       if (/^gameDb\/gamedata-\d{14}.zip$/.test(name) === false) {
+  //         continue;
+  //       }
+  //       zipSet.add(name);
+  //     }
+  //     break;
+  //   }
+  // }
 
   return [...zipSet].sort();
 }
